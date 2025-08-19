@@ -100,6 +100,31 @@ a:hover {
       color: #777;
     }
   </style>
+  #skills {
+  padding: 2rem 0;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 0;
+}
+
+.skills-list li {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 </head>
 <body>
   <header>
@@ -108,13 +133,24 @@ a:hover {
   </header>
 
   <section>
-    <h2>Om mig</h2>
+    <h2>Profil</h2>
     <p>
-    Jag heter Muhammad Awais och studerar till Front-end utvecklare på KYH i Sverige.
+    Jag heter Muhammad Awais och studerar till Front-end Utvecklare på KYH i Sverige.
     Jag brinner för moderna webblösningar och jobbar med HTML, CSS, JavaScript, TypeScript och React.
     Mitt mål är att bygga användarvänliga, responsiva och professionella gränssnitt med fokus på bra användarupplevelse.
     </p>
   </section>
+  <section id="skills">
+  <h2>Kompetenser</h2>
+  <ul class="skills-list">
+    <li><i class="fab fa-html5"></i> HTML5</li>
+    <li><i class="fab fa-css3-alt"></i> CSS3</li>
+    <li><i class="fab fa-js"></i> JavaScript (ES6+)</li>
+    <li><i class="fa-brands fa-ts"></i> TypeScript</li>
+    <li><i class="fab fa-react"></i> React</li>
+    <li><i class="fab fa-figma"></i> Figma / UI-design</li>
+  </ul>
+</section>
 
   <section>
     <h2>Mina Projekt</h2>
