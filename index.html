@@ -144,26 +144,21 @@
       margin-right: 4px;
     }
 
-    /* Default: dark mode active -> moon bright */
-    body:not(.light-theme) .toggle-icon.moon {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
+    /* ICON LOGIC: show NEXT theme (target) */
+    /* Default dark mode: show SUN (you can go to light) */
     body:not(.light-theme) .toggle-icon.sun {
-      opacity: 0.35;
-      transform: translateX(0);
-    }
-
-    /* Light mode: sun bright */
-    body.light-theme .toggle-icon.sun {
       opacity: 1;
-      transform: translateX(0);
+    }
+    body:not(.light-theme) .toggle-icon.moon {
+      opacity: 0.35;
     }
 
-    body.light-theme .toggle-icon.moon {
+    /* Light mode: show MOON (you can go to dark) */
+    body.light-theme .toggle-icon.sun {
       opacity: 0.35;
-      transform: translateX(0);
+    }
+    body.light-theme .toggle-icon.moon {
+      opacity: 1;
     }
 
     .toggle-thumb {
@@ -424,13 +419,13 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Theme from localStorage
+    // Load theme from localStorage
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
       document.body.classList.add("light-theme");
     }
 
-    // Toggle theme
+    // Toggle theme & persist
     themeToggle.addEventListener("click", () => {
       const isLight = document.body.classList.toggle("light-theme");
       localStorage.setItem("theme", isLight ? "light" : "dark");
