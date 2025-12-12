@@ -132,7 +132,8 @@
     .toggle-icon {
       font-size: 0.9rem;
       z-index: 2;
-      opacity: 0.3; /* base, JS adjusts */
+      opacity: 0;          /* JS will control */
+      visibility: hidden;  /* JS will control */
       transition: opacity 0.25s ease;
     }
 
@@ -395,7 +396,7 @@
     const sunIcon = document.querySelector(".toggle-icon.sun");
     const moonIcon = document.querySelector(".toggle-icon.moon");
 
-    // Scroll to top button
+    // Scroll-to-top button
     window.addEventListener("scroll", () => {
       upBtn.style.display = window.scrollY > 200 ? "block" : "none";
     });
@@ -404,16 +405,23 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    function applyIconState() {
+    function updateToggleIcons() {
       const isLight = document.body.classList.contains("light-theme");
+
       if (isLight) {
-        // LIGHT MODE ACTIVE → show SUN bright
+        // LIGHT MODE → show SUN only
         sunIcon.style.opacity = "1";
-        moonIcon.style.opacity = "0.3";
+        sunIcon.style.visibility = "visible";
+
+        moonIcon.style.opacity = "0";
+        moonIcon.style.visibility = "hidden";
       } else {
-        // DARK MODE ACTIVE → show MOON bright
-        sunIcon.style.opacity = "0.3";
+        // DARK MODE → show MOON only
         moonIcon.style.opacity = "1";
+        moonIcon.style.visibility = "visible";
+
+        sunIcon.style.opacity = "0";
+        sunIcon.style.visibility = "hidden";
       }
     }
 
@@ -422,13 +430,14 @@
     if (savedTheme === "light") {
       document.body.classList.add("light-theme");
     }
-    applyIconState();
+
+    updateToggleIcons();
 
     // Toggle theme & persist
     themeToggle.addEventListener("click", () => {
       const isLight = document.body.classList.toggle("light-theme");
       localStorage.setItem("theme", isLight ? "light" : "dark");
-      applyIconState();
+      updateToggleIcons();
     });
   </script>
 
