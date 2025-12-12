@@ -9,6 +9,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    :root {
+      /* Dark theme (default) */
+      --bg: #121212;
+      --text: #ffffff;
+      --header-subtext: #717070;
+      --border: #444;
+      --card-bg: #1a1a1a;
+      --card-bg-alt: #222222;
+      --card-border: #333;
+      --card-text: #ccc;
+      --skills-bg: #1f1f1f;
+      --skills-border: #333;
+      --footer-text: #777;
+      --scroll-btn-bg: #555;
+      --scroll-btn-hover-bg: #777;
+      --link-color: #eee;
+      --link-hover: #ffae00;
+      --contact-icon: #eee;
+      --contact-icon-hover: #ffae00;
+    }
+
+    body.light-theme {
+      /* Light theme overrides */
+      --bg: #f7f7f7;
+      --text: #1f1f1f;
+      --header-subtext: #555;
+      --border: #e0e0e0;
+      --card-bg: #ffffff;
+      --card-bg-alt: #ffffff;
+      --card-border: #e0e0e0;
+      --card-text: #555;
+      --skills-bg: #ffffff;
+      --skills-border: #dcdcdc;
+      --footer-text: #777;
+      --scroll-btn-bg: #4a6cf7;
+      --scroll-btn-hover-bg: #3a56d8;
+      --link-color: #1f1f1f;
+      --link-hover: #4a6cf7;
+      --contact-icon: #4a6cf7;
+      --contact-icon-hover: #2648d8;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -16,35 +58,74 @@
       font-family: 'Inter', sans-serif;
     }
 
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
     a {
-      color: #eee;
+      color: var(--link-color);
       text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     a:hover {
-      color: #ffae00;
-    }
-
-    body {
-      background-color: #121212;
-      color: #ffffff;
-      line-height: 1.6;
-      padding: 2rem;
+      color: var(--link-hover);
     }
 
     header {
       text-align: center;
       margin-bottom: 3rem;
+      position: relative;
     }
 
     header h1 {
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      font-weight: 700;
     }
 
     header p {
-      color: #b1b1b1;
+      color: var(--header-subtext);
+    }
+
+    /* Theme toggle button */
+    #themeToggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.4rem 0.8rem;
+      font-size: 1.1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    }
+
+    #themeToggle span {
+      font-size: 0.8rem;
+    }
+
+    #themeToggle:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    }
+
+    body.light-theme #themeToggle {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    body.light-theme #themeToggle:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
 
     section {
@@ -55,39 +136,49 @@
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
-      border-bottom: 2px solid #333;
+      border-bottom: 2px solid var(--border);
       padding-bottom: 0.5rem;
-      font-weight: 600;
     }
 
     /* PROJECT CARDS */
     .project {
-      background: #1a1a1a;
-      border: 1px solid #333;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       padding: 1.5rem;
       margin-bottom: 1rem;
-      border-radius: 10px;
-      transition: transform .25s, box-shadow .25s;
+      border-radius: 8px;
+      transition: transform .25s, box-shadow .25s, border-color .25s, background-color .25s;
       cursor: pointer;
+    }
+
+    .projects .project:nth-child(1),
+    .projects .project:nth-child(2),
+    .projects .project:nth-child(3),
+    .projects .project:nth-child(4) {
+      background: var(--card-bg-alt);
     }
 
     .project:hover {
       transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
       border-color: #555;
+    }
+
+    body.light-theme .project:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      border-color: #c7c7c7;
     }
 
     .project h3 {
       margin-bottom: 0.5rem;
-      font-weight: 600;
     }
 
     .project p {
-      font-size: 0.95rem;
-      color: #cccccc;
+      font-size: 0.9rem;
+      color: var(--card-text);
     }
 
-    /* SKILLS SECTION */
+    /* SKILLS */
     #skills {
       padding: 2rem 0;
     }
@@ -101,8 +192,8 @@
     }
 
     .skills-list li {
-      background: #1f1f1f;
-      border: 1px solid #333;
+      background: var(--skills-bg);
+      border: 1px solid var(--skills-border);
       padding: 0.6rem 1rem;
       border-radius: 20px;
       font-size: 0.9rem;
@@ -110,7 +201,11 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      transition: transform .25s ease, box-shadow .25s ease;
+      transition: transform .25s ease, box-shadow .25s ease, background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    body.light-theme .skills-list li {
+      color: #333;
     }
 
     .skills-list li:hover {
@@ -118,23 +213,28 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.4);
     }
 
+    body.light-theme .skills-list li:hover {
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+
     /* CONTACT ICONS */
     #contact i {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       margin-right: 1rem;
-      transition: 0.25s ease;
+      transition: transform 0.25s ease, color 0.25s ease;
+      color: var(--contact-icon);
     }
 
     #contact i:hover {
       transform: scale(1.2);
-      color: #ffae00;
+      color: var(--contact-icon-hover);
     }
 
     footer {
       text-align: center;
       font-size: 0.9rem;
-      color: #777;
-      margin-top: 3rem;
+      color: var(--footer-text);
+      margin-top: 2rem;
     }
 
     /* SCROLL TO TOP BUTTON */
@@ -142,20 +242,20 @@
       position: fixed;
       bottom: 40px;
       right: 40px;
-      padding: 12px 16px;
+      padding: 10px 15px;
       font-size: 20px;
       border-radius: 50%;
       border: none;
-      background: #444;
+      background: var(--scroll-btn-bg);
       color: white;
       cursor: pointer;
       display: none;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
       transition: 0.25s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
     }
 
     #topBtn:hover {
-      background: #666;
+      background: var(--scroll-btn-hover-bg);
       transform: translateY(-3px);
     }
   </style>
@@ -166,6 +266,11 @@
   <header>
     <h1>Muhammad Awais</h1>
     <p>Front-end Utvecklare | KYH Student</p>
+
+    <button id="themeToggle" aria-label="Byt tema">
+      <span id="themeIcon">🌙</span>
+      <span>Byt tema</span>
+    </button>
   </header>
 
   <section>
@@ -193,34 +298,35 @@
   <section>
     <h2>Mina Projekt</h2>
 
-    <div class="project">
-      <h3>Nordstay</h3>
-      <p>
-        Nordstay är en Airbnb-inspirerad bokningsapplikation byggd med React + TypeScript och en backend baserad på
-        Node.js, Express, Prisma och Supabase.
-      </p>
-    </div>
+    <div class="projects">
+      <div class="project">
+        <h3>Nordstay</h3>
+        <p>
+          Nordstay är en Airbnb-inspirerad bokningsapplikation. Projektet består av en fullstack-lösning med
+          React + TypeScript i frontend och Node.js + Express + Prisma + Supabase i backend.
+        </p>
+      </div>
 
-    <div class="project">
-      <h3>ProductsAPI</h3>
-      <p>En enkel API-lösning för att träna på REST, fetch och datahantering.</p>
-    </div>
+      <div class="project">
+        <h3>ProductsAPI</h3>
+        <p>En enkel API-lösning med produkter, perfekt för att träna på fetch och datahantering.</p>
+      </div>
 
-    <div class="project">
-      <h3>Silicon-designen</h3>
-      <p>En ren UI-design inspirerad av modern teknik — byggd med HTML och CSS.</p>
-    </div>
+      <div class="project">
+        <h3>Silicon-designen</h3>
+        <p>UI-design inspirerad av modern teknik och minimalism, med fokus på ren HTML och CSS.</p>
+      </div>
 
-    <div class="project">
-      <h3>Javascript-uppgift</h3>
-      <p>Övningar med DOM-manipulation, interaktiv logik och problemlösning.</p>
-    </div>
+      <div class="project">
+        <h3>Javascript-uppgift</h3>
+        <p>Ett projekt där jag löste JavaScript-övningar med DOM-manipulation och interaktiv logik.</p>
+      </div>
 
-    <div class="project">
-      <h3>Eventsite.js</h3>
-      <p>En webbsida för evenemang med formulär och grundläggande JavaScript-funktioner.</p>
+      <div class="project">
+        <h3>Eventsite.js</h3>
+        <p>En webbsida för evenemang med formulärhantering och grundläggande JS-funktionalitet.</p>
+      </div>
     </div>
-
   </section>
 
   <section id="contact">
@@ -234,7 +340,6 @@
         <i class="fab fa-github"></i>
       </a>
 
-      <!-- WORKING LINKEDIN LINK -->
       <a href="https://www.linkedin.com/in/m-awais-60961b1b8/" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-linkedin"></i>
       </a>
@@ -248,14 +353,39 @@
   <button id="topBtn">▲</button>
 
   <script>
-    const topBtn = document.getElementById('topBtn');
+    const upBtn = document.getElementById("topBtn");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
 
-    window.addEventListener('scroll', () => {
-      topBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+    // Scroll to top button
+    window.addEventListener("scroll", () => {
+      upBtn.style.display = window.scrollY > 200 ? "block" : "none";
     });
 
-    topBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    upBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Theme initialization from localStorage
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+      document.body.classList.add("light-theme");
+      themeIcon.textContent = "🌙";
+    } else {
+      themeIcon.textContent = "🌞";
+    }
+
+    // Theme toggle
+    themeToggle.addEventListener("click", () => {
+      const isLight = document.body.classList.toggle("light-theme");
+      if (isLight) {
+        themeIcon.textContent = "🌙";
+        localStorage.setItem("theme", "light");
+      } else {
+        themeIcon.textContent = "🌞";
+        localStorage.setItem("theme", "dark");
+      }
     });
   </script>
 
