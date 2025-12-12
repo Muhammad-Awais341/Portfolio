@@ -9,48 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      /* Dark theme (default) */
-      --bg: #121212;
-      --text: #ffffff;
-      --header-subtext: #717070;
-      --border: #444;
-      --card-bg: #1a1a1a;
-      --card-bg-alt: #222222;
-      --card-border: #333;
-      --card-text: #ccc;
-      --skills-bg: #1f1f1f;
-      --skills-border: #333;
-      --footer-text: #777;
-      --scroll-btn-bg: #555;
-      --scroll-btn-hover-bg: #777;
-      --link-color: #eee;
-      --link-hover: #ffae00;
-      --contact-icon: #eee;
-      --contact-icon-hover: #ffae00;
-    }
-
-    body.light-theme {
-      /* Light theme overrides */
-      --bg: #f7f7f7;
-      --text: #1f1f1f;
-      --header-subtext: #555;
-      --border: #e0e0e0;
-      --card-bg: #ffffff;
-      --card-bg-alt: #ffffff;
-      --card-border: #e0e0e0;
-      --card-text: #555;
-      --skills-bg: #ffffff;
-      --skills-border: #dcdcdc;
-      --footer-text: #777;
-      --scroll-btn-bg: #4a6cf7;
-      --scroll-btn-hover-bg: #3a56d8;
-      --link-color: #1f1f1f;
-      --link-hover: #4a6cf7;
-      --contact-icon: #4a6cf7;
-      --contact-icon-hover: #2648d8;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -59,108 +17,35 @@
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: #121212;
+      color: #ffffff;
       line-height: 1.6;
       padding: 2rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     a {
-      color: var(--link-color);
+      color: #eee;
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     a:hover {
-      color: var(--link-hover);
+      color: #ffae00;
     }
 
     header {
       text-align: center;
       margin-bottom: 3rem;
-      position: relative;
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       margin-bottom: 0.5rem;
+      font-weight: 700;
     }
 
     header p {
-      color: var(--header-subtext);
-    }
-
-    /* Theme toggle button – iOS-style switch */
-    #themeToggle {
-      position: absolute;
-      top: 0;
-      right: 0;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .toggle-inner {
-      position: relative;
-      width: 56px;
-      height: 30px;
-      border-radius: 999px;
-      padding: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
-    }
-
-    body.light-theme .toggle-inner {
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      border-color: rgba(0,0,0,0.04);
-    }
-
-    #themeToggle:active .toggle-inner {
-      transform: scale(0.96);
-    }
-
-    .toggle-icon {
-      font-size: 0.9rem;
-      z-index: 2;
-      opacity: 0;          /* JS will control */
-      visibility: hidden;  /* JS will control */
-      transition: opacity 0.25s ease;
-    }
-
-    .toggle-icon.sun {
-      margin-left: 4px;
-    }
-
-    .toggle-icon.moon {
-      margin-right: 4px;
-    }
-
-    .toggle-thumb {
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #ffffff;
-      top: 4px;
-      left: 4px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.45);
-      transition: transform 0.25s ease-in-out, background-color 0.25s ease;
-    }
-
-    body.light-theme .toggle-thumb {
-      transform: translateX(26px);
-      background: #fdfdfd;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+      color: #717070;
     }
 
     section {
@@ -171,37 +56,24 @@
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid #444;
       padding-bottom: 0.5rem;
     }
 
     /* PROJECT CARDS */
     .project {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: #1a1a1a;
+      border: 1px solid #333;
       padding: 1.5rem;
       margin-bottom: 1rem;
       border-radius: 8px;
-      transition: transform .25s, box-shadow .25s, border-color .25s, background-color .25s;
-      cursor: pointer;
-    }
-
-    .projects .project:nth-child(1),
-    .projects .project:nth-child(2),
-    .projects .project:nth-child(3),
-    .projects .project:nth-child(4) {
-      background: var(--card-bg-alt);
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
     .project:hover {
       transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
       border-color: #555;
-    }
-
-    body.light-theme .project:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-      border-color: #c7c7c7;
     }
 
     .project h3 {
@@ -209,8 +81,8 @@
     }
 
     .project p {
-      font-size: 0.9rem;
-      color: var(--card-text);
+      font-size: 0.95rem;
+      color: #ccc;
     }
 
     /* SKILLS */
@@ -227,8 +99,8 @@
     }
 
     .skills-list li {
-      background: var(--skills-bg);
-      border: 1px solid var(--skills-border);
+      background: #1f1f1f;
+      border: 1px solid #333;
       padding: 0.6rem 1rem;
       border-radius: 20px;
       font-size: 0.9rem;
@@ -236,11 +108,7 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      transition: transform .25s ease, box-shadow .25s ease, background-color 0.25s ease, border-color 0.25s ease;
-    }
-
-    body.light-theme .skills-list li {
-      color: #333;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
     .skills-list li:hover {
@@ -248,28 +116,23 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.4);
     }
 
-    body.light-theme .skills-list li:hover {
-      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-    }
-
     /* CONTACT ICONS */
     #contact i {
       font-size: 1.6rem;
       margin-right: 1rem;
       transition: transform 0.25s ease, color 0.25s ease;
-      color: var(--contact-icon);
     }
 
     #contact i:hover {
       transform: scale(1.2);
-      color: var(--contact-icon-hover);
+      color: #ffae00;
     }
 
     footer {
       text-align: center;
       font-size: 0.9rem;
-      color: var(--footer-text);
-      margin-top: 2rem;
+      color: #777;
+      margin-top: 3rem;
     }
 
     /* SCROLL TO TOP BUTTON */
@@ -281,7 +144,7 @@
       font-size: 20px;
       border-radius: 50%;
       border: none;
-      background: var(--scroll-btn-bg);
+      background: #555;
       color: white;
       cursor: pointer;
       display: none;
@@ -290,7 +153,7 @@
     }
 
     #topBtn:hover {
-      background: var(--scroll-btn-hover-bg);
+      background: #777;
       transform: translateY(-3px);
     }
   </style>
@@ -301,14 +164,6 @@
   <header>
     <h1>Muhammad Awais</h1>
     <p>Front-end Utvecklare | KYH Student</p>
-
-    <button id="themeToggle" aria-label="Byt tema" type="button">
-      <div class="toggle-inner">
-        <span class="toggle-icon sun">☀️</span>
-        <span class="toggle-icon moon">🌙</span>
-        <div class="toggle-thumb"></div>
-      </div>
-    </button>
   </header>
 
   <section>
@@ -336,35 +191,34 @@
   <section>
     <h2>Mina Projekt</h2>
 
-    <div class="projects">
-      <div class="project">
-        <h3>Nordstay</h3>
-        <p>
-          Nordstay är en Airbnb-inspirerad bokningsapplikation. Projektet består av en fullstack-lösning med
-          React + TypeScript i frontend och Node.js + Express + Prisma + Supabase i backend.
-        </p>
-      </div>
-
-      <div class="project">
-        <h3>ProductsAPI</h3>
-        <p>En enkel API-lösning med produkter, perfekt för att träna på fetch och datahantering.</p>
-      </div>
-
-      <div class="project">
-        <h3>Silicon-designen</h3>
-        <p>UI-design inspirerad av modern teknik och minimalism, med fokus på ren HTML och CSS.</p>
-      </div>
-
-      <div class="project">
-        <h3>Javascript-uppgift</h3>
-        <p>Ett projekt där jag löste JavaScript-övningar med DOM-manipulation och interaktiv logik.</p>
-      </div>
-
-      <div class="project">
-        <h3>Eventsite.js</h3>
-        <p>En webbsida för evenemang med formulärhantering och grundläggande JS-funktionalitet.</p>
-      </div>
+    <div class="project">
+      <h3>Nordstay</h3>
+      <p>
+        Nordstay är en Airbnb-inspirerad bokningsapplikation byggd med React + TypeScript och
+        Node.js, Express, Prisma och Supabase i backend.
+      </p>
     </div>
+
+    <div class="project">
+      <h3>ProductsAPI</h3>
+      <p>En enkel API-lösning för att träna på REST, fetch och datahantering.</p>
+    </div>
+
+    <div class="project">
+      <h3>Silicon-designen</h3>
+      <p>En ren UI-design inspirerad av modern teknik, byggd med HTML och CSS.</p>
+    </div>
+
+    <div class="project">
+      <h3>Javascript-uppgift</h3>
+      <p>JavaScript-övningar med DOM-manipulation och interaktiv logik.</p>
+    </div>
+
+    <div class="project">
+      <h3>Eventsite.js</h3>
+      <p>En evenemangssida med formulär och grundläggande JavaScript-funktionalitet.</p>
+    </div>
+
   </section>
 
   <section id="contact">
@@ -392,52 +246,13 @@
 
   <script>
     const upBtn = document.getElementById("topBtn");
-    const themeToggle = document.getElementById("themeToggle");
-    const sunIcon = document.querySelector(".toggle-icon.sun");
-    const moonIcon = document.querySelector(".toggle-icon.moon");
 
-    // Scroll-to-top button
     window.addEventListener("scroll", () => {
       upBtn.style.display = window.scrollY > 200 ? "block" : "none";
     });
 
     upBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    function updateToggleIcons() {
-      const isLight = document.body.classList.contains("light-theme");
-
-      if (isLight) {
-        // LIGHT MODE → show SUN only
-        sunIcon.style.opacity = "1";
-        sunIcon.style.visibility = "visible";
-
-        moonIcon.style.opacity = "0";
-        moonIcon.style.visibility = "hidden";
-      } else {
-        // DARK MODE → show MOON only
-        moonIcon.style.opacity = "1";
-        moonIcon.style.visibility = "visible";
-
-        sunIcon.style.opacity = "0";
-        sunIcon.style.visibility = "hidden";
-      }
-    }
-
-    // Load theme from localStorage
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-      document.body.classList.add("light-theme");
-    }
-
-    updateToggleIcons();
-
-    // Toggle theme & persist
-    themeToggle.addEventListener("click", () => {
-      const isLight = document.body.classList.toggle("light-theme");
-      localStorage.setItem("theme", isLight ? "light" : "dark");
-      updateToggleIcons();
     });
   </script>
 
