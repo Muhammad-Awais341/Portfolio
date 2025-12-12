@@ -91,41 +91,97 @@
       color: var(--header-subtext);
     }
 
-    /* Theme toggle button */
+    /* Theme toggle button – iOS-style switch */
     #themeToggle {
       position: absolute;
       top: 0;
       right: 0;
-      padding: 0.4rem 0.8rem;
-      font-size: 1.1rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
+      border: none;
       background: transparent;
-      color: var(--text);
       cursor: pointer;
+      padding: 0;
+    }
+
+    .toggle-inner {
+      position: relative;
+      width: 56px;
+      height: 30px;
+      border-radius: 999px;
+      padding: 4px;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
     }
 
-    #themeToggle span {
-      font-size: 0.8rem;
+    body.light-theme .toggle-inner {
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      border-color: rgba(0,0,0,0.04);
     }
 
-    #themeToggle:hover {
-      background-color: rgba(255, 255, 255, 0.06);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    #themeToggle:active .toggle-inner {
+      transform: scale(0.96);
     }
 
-    body.light-theme #themeToggle {
-      background-color: rgba(0, 0, 0, 0.03);
+    .toggle-icon {
+      font-size: 0.9rem;
+      z-index: 2;
+      opacity: 0.45;
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
-    body.light-theme #themeToggle:hover {
-      background-color: rgba(0, 0, 0, 0.06);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    .toggle-icon.sun {
+      margin-left: 4px;
+    }
+
+    .toggle-icon.moon {
+      margin-right: 4px;
+    }
+
+    /* Default: dark mode active -> moon bright */
+    body:not(.light-theme) .toggle-icon.moon {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    body:not(.light-theme) .toggle-icon.sun {
+      opacity: 0.35;
+      transform: translateX(0);
+    }
+
+    /* Light mode: sun bright */
+    body.light-theme .toggle-icon.sun {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    body.light-theme .toggle-icon.moon {
+      opacity: 0.35;
+      transform: translateX(0);
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffffff;
+      top: 4px;
+      left: 4px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+      transition: transform 0.25s ease-in-out, background-color 0.25s ease;
+    }
+
+    body.light-theme .toggle-thumb {
+      transform: translateX(26px);
+      background: #fdfdfd;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.18);
     }
 
     section {
@@ -267,9 +323,12 @@
     <h1>Muhammad Awais</h1>
     <p>Front-end Utvecklare | KYH Student</p>
 
-    <button id="themeToggle" aria-label="Byt tema">
-      <span id="themeIcon">🌙</span>
-      <span>Byt tema</span>
+    <button id="themeToggle" aria-label="Byt tema" type="button">
+      <div class="toggle-inner">
+        <span class="toggle-icon sun">☀️</span>
+        <span class="toggle-icon moon">🌙</span>
+        <div class="toggle-thumb"></div>
+      </div>
     </button>
   </header>
 
@@ -355,7 +414,6 @@
   <script>
     const upBtn = document.getElementById("topBtn");
     const themeToggle = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
 
     // Scroll to top button
     window.addEventListener("scroll", () => {
@@ -366,26 +424,16 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Theme initialization from localStorage
+    // Theme from localStorage
     const savedTheme = localStorage.getItem("theme");
-
     if (savedTheme === "light") {
       document.body.classList.add("light-theme");
-      themeIcon.textContent = "🌙";
-    } else {
-      themeIcon.textContent = "🌞";
     }
 
-    // Theme toggle
+    // Toggle theme
     themeToggle.addEventListener("click", () => {
       const isLight = document.body.classList.toggle("light-theme");
-      if (isLight) {
-        themeIcon.textContent = "🌙";
-        localStorage.setItem("theme", "light");
-      } else {
-        themeIcon.textContent = "🌞";
-        localStorage.setItem("theme", "dark");
-      }
+      localStorage.setItem("theme", isLight ? "light" : "dark");
     });
   </script>
 
