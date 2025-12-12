@@ -132,7 +132,7 @@
     .toggle-icon {
       font-size: 0.9rem;
       z-index: 2;
-      opacity: 0.3;
+      opacity: 0.3; /* base, JS adjusts */
       transition: opacity 0.25s ease;
     }
 
@@ -407,11 +407,11 @@
     function applyIconState() {
       const isLight = document.body.classList.contains("light-theme");
       if (isLight) {
-        // LIGHT MODE ACTIVE → show SUN
+        // LIGHT MODE ACTIVE → show SUN bright
         sunIcon.style.opacity = "1";
         moonIcon.style.opacity = "0.3";
       } else {
-        // DARK MODE ACTIVE → show MOON
+        // DARK MODE ACTIVE → show MOON bright
         sunIcon.style.opacity = "0.3";
         moonIcon.style.opacity = "1";
       }
