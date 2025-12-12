@@ -132,8 +132,8 @@
     .toggle-icon {
       font-size: 0.9rem;
       z-index: 2;
-      opacity: 0.45;
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      opacity: 0.3;
+      transition: opacity 0.25s ease;
     }
 
     .toggle-icon.sun {
@@ -142,23 +142,6 @@
 
     .toggle-icon.moon {
       margin-right: 4px;
-    }
-
-    /* ICON LOGIC: show NEXT theme (target) */
-    /* Default dark mode: show SUN (you can go to light) */
-    body:not(.light-theme) .toggle-icon.sun {
-      opacity: 1;
-    }
-    body:not(.light-theme) .toggle-icon.moon {
-      opacity: 0.35;
-    }
-
-    /* Light mode: show MOON (you can go to dark) */
-    body.light-theme .toggle-icon.sun {
-      opacity: 0.35;
-    }
-    body.light-theme .toggle-icon.moon {
-      opacity: 1;
     }
 
     .toggle-thumb {
@@ -409,6 +392,8 @@
   <script>
     const upBtn = document.getElementById("topBtn");
     const themeToggle = document.getElementById("themeToggle");
+    const sunIcon = document.querySelector(".toggle-icon.sun");
+    const moonIcon = document.querySelector(".toggle-icon.moon");
 
     // Scroll to top button
     window.addEventListener("scroll", () => {
@@ -419,16 +404,31 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
+    function applyIconState() {
+      const isLight = document.body.classList.contains("light-theme");
+      if (isLight) {
+        // LIGHT MODE ACTIVE → show SUN
+        sunIcon.style.opacity = "1";
+        moonIcon.style.opacity = "0.3";
+      } else {
+        // DARK MODE ACTIVE → show MOON
+        sunIcon.style.opacity = "0.3";
+        moonIcon.style.opacity = "1";
+      }
+    }
+
     // Load theme from localStorage
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
       document.body.classList.add("light-theme");
     }
+    applyIconState();
 
     // Toggle theme & persist
     themeToggle.addEventListener("click", () => {
       const isLight = document.body.classList.toggle("light-theme");
       localStorage.setItem("theme", isLight ? "light" : "dark");
+      applyIconState();
     });
   </script>
 
